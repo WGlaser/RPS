@@ -1,0 +1,59 @@
+<script>
+var plays = ["Rock", "Paper", "Scissors"];
+function computerPlay(){
+  return plays[Math.floor(Math.random() * plays.length)];
+}  	
+function playRound(playerSelection,cs){
+  ps = playerSelection.toLowerCase();
+  cs = cs.toLowerCase();
+  if(ps =="rock" && cs=="paper"){
+    console.log( "You lose! Paper beats Rock!");
+    return "c";
+  }
+  if(ps =="rock" && cs=="scissors"){
+    console.log("You win! Rock beats Scissors!");
+    return "p";
+  }
+  if(ps =="scissors" && cs=="paper"){
+    console.log( "You Win! Scissors beats Paper!");
+    return "p";
+  }
+  if(ps =="Scissors" && cs=="Rock"){
+    console.log( "You lose! Rock beats scissors!");
+    return "c";
+  }
+  if(ps =="paper" && cs=="scissors"){
+    console.log( "You lose! Scissors beats paper!");
+    return "c";
+  }
+  if(ps =="paper" && cs=="rock"){
+    console.log( "You win! Paper beats Rock!");
+    return "p";
+  }
+  else{
+    console.log( "Tie Game!");
+      return "t";
+  }
+}
+
+function game(){
+  var GP = 0;
+  var playerScore = 0;
+  var computerScore = 0;
+  while(GP<5){
+    result = window.prompt("What is your play?", "Rock, paper, or scissors?");
+  result = playRound(result, computerPlay());
+  if(result == "p"){
+    playerScore++;
+  }
+  if(result == "c"){
+    computerScore++;
+  }
+  GP++;
+  }
+  console.log("Final Score is "+ playerScore + " wins for player to " + computerScore + "for computer");
+}
+
+game();  	
+    
+</script>
