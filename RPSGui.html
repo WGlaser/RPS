@@ -21,8 +21,17 @@
    	<button onclick="alertFunction()">Reset</button>
    </div>
    <div class="resultText"></div>
+   <div class="scoreBoard"></div>
  <script>
+  var compScore = 0;
+  var playerScore = 0;
+  var GP = 0;
  	var compplays = ["Rock", "Paper", "Scissors"];
+  const h1score = document.createElement('h1');
+        h1score.textContent= "You: " + playerScore + " Computer: "+ compScore;
+        const scoreText = document.querySelector('.scoreBoard');
+        scoreText.appendChild(h1score);
+
  	function computerPlay(){
   		return compplays[Math.floor(Math.random() * compplays.length)];
 	}
@@ -50,8 +59,8 @@
   		  resText.appendChild(h1);
     		return "p";
  		 }
-  		if(ps =="Scissors" && cs=="Rock"){
-   			 const h1 = document.createElement('h1');
+  		if(ps =="scissors" && cs=="rock"){
+   			const h1 = document.createElement('h1');
   		  h1.textContent= "You lose! Rock beats scissors!";
   		  const resText = document.querySelector('.resultText');
   		  resText.appendChild(h1);
@@ -65,7 +74,7 @@
     		return "c";
  		 }
   		if(ps =="paper" && cs=="rock"){
-   			 const h1 = document.createElement('h1');
+   			const h1 = document.createElement('h1');
   		  h1.textContent= "You win! paper beats rock!";
   		  const resText = document.querySelector('.resultText');
   		  resText.appendChild(h1);
@@ -85,8 +94,9 @@
  	}
  	function removeHover(e){
    		this.classList.remove('hover');
-    }
-    function makeMove(e){
+  }
+
+  function makeMove(e){
     	const compPlay = document.querySelector('.computerPlay');
 
     	if(compPlay.firstChild !== null){
@@ -117,8 +127,33 @@
     		compPlay.appendChild(img);
 
     	}
-    	playRound(e.target.alt, cp);
+    	result = playRound(e.target.alt, cp);
+      if(result == "p"){
+        playerScore++;
+        GP++;
+      }
+      if(result == "c"){
+        compScore++;
+        GP++;
+      }
+      
+       const s = document.querySelector('.scoreBoard');
+       const t =s.firstChild;
+       t.textContent = "You: " + playerScore + " Computer: "+ compScore;
+       checkWinner();
     }
+
+    function checkWinner(){
+      console.log("checkingwinner");
+      if(compScore == 5){
+        alert("Computer  won!");
+      }
+      if(playerScore ==5){
+        alert("Player won!");
+      }
+    }
+
+      
 
     function alertFunction(){
     	const compPlay = document.querySelector('.computerPlay');
@@ -127,9 +162,9 @@
     	compPlay.removeChild(compImage);
     }
     const result = document.querySelector('.resultText');
-    if(result.firstChild !== null){
+      if(result.firstChild !== null){
     	result.removeChild(result.firstChild);
-    }
+      }
     }
 
  	const plays =document.querySelectorAll('.play');
