@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<head>
+  <title>RPS Gui</title>
+  <link rel="stylesheet" href="RPS.css">
+</head>
+<body>
+  <div class="plays">
+    <div  class="play">
+      <img class ="pic" src="rock.jpg" alt="rock">
+    </div>
+    <div  class ="play">
+      <img class ="pic" src="paper.png" alt="paper">
+    </div>
+    <div class="play">
+      <img class ="pic" src="scissors.png" alt="scissors">
+    </div>
+
+  </div>
+   <div class="computerPlay"></div>
+   <div>
+   	<button onclick="alertFunction()">Reset</button>
+   </div>
+   <div class="resultText"></div>
+ <script>
+ 	var compplays = ["Rock", "Paper", "Scissors"];
+ 	function computerPlay(){
+  		return compplays[Math.floor(Math.random() * compplays.length)];
+	}
+	function playRound(playerSelection,cs){
+  		ps = playerSelection.toLowerCase();
+  		cs = cs.toLowerCase();
+  		if(ps =="rock" && cs=="paper"){
+  		  const h1 = document.createElement('h1');
+  		  h1.textContent= "You lose! Paper beats rock!";
+  		  const resText = document.querySelector('.resultText');
+  		  resText.appendChild(h1);
+    	  return "c";
+  		}
+  		if(ps =="rock" && cs=="scissors"){
+		  const h1 = document.createElement('h1');
+  		  h1.textContent= "You win! Rock beats scissors!";
+  		  const resText = document.querySelector('.resultText');
+  		  resText.appendChild(h1);    	
+  		  return "p";
+  		}
+  		if(ps =="scissors" && cs=="paper"){
+    	  const h1 = document.createElement('h1');
+  		  h1.textContent= "You win! Scissors beats paper!";
+  		  const resText = document.querySelector('.resultText');
+  		  resText.appendChild(h1);
+    		return "p";
+ 		 }
+  		if(ps =="Scissors" && cs=="Rock"){
+   			 const h1 = document.createElement('h1');
+  		  h1.textContent= "You lose! Rock beats scissors!";
+  		  const resText = document.querySelector('.resultText');
+  		  resText.appendChild(h1);
+    		return "c";
+  		}
+  		if(ps =="paper" && cs=="scissors"){
+    		 const h1 = document.createElement('h1');
+  		  h1.textContent= "You lose! scissors beats paper!";
+  		  const resText = document.querySelector('.resultText');
+  		  resText.appendChild(h1);
+    		return "c";
+ 		 }
+  		if(ps =="paper" && cs=="rock"){
+   			 const h1 = document.createElement('h1');
+  		  h1.textContent= "You win! paper beats rock!";
+  		  const resText = document.querySelector('.resultText');
+  		  resText.appendChild(h1);
+    		return "p";
+  		}
+  		else{
+ 		const h1 = document.createElement('h1');
+  		  h1.textContent= "Tie game!";
+  		  const resText = document.querySelector('.resultText');
+  		  resText.appendChild(h1);   		    return "t";
+  		}
+	}
+ 	function onHover(e){
+ 		if(e.target.className == "pic" && e.target.parentNode.className!=="computerPlay"){
+ 		e.target.parentNode.classList.add('hover');
+		}
+ 	}
+ 	function removeHover(e){
+   		this.classList.remove('hover');
+    }
+    function makeMove(e){
+    	const compPlay = document.querySelector('.computerPlay');
+
+    	if(compPlay.firstChild !== null){
+    		alertFunction();
+    	}
+    	cp = computerPlay();
+    	if(cp == "Rock"){
+    		console.log("here1");
+    		const img = document.createElement('img');
+    		img.classList.add('pic');
+    		img.src="rock.jpg";
+    		compPlay.appendChild(img);
+    		
+    	}
+    	if(cp =="Scissors"){
+    		console.log("here2");
+			const img = document.createElement('img');
+    		img.classList.add('pic');
+    		img.src="scissors.png";
+    		compPlay.appendChild(img);
+
+    	}
+    	if(cp =="Paper"){
+    		console.log("here3");
+    		const img = document.createElement('img');
+    		img.classList.add('pic');
+    		img.src = "paper.png";
+    		compPlay.appendChild(img);
+
+    	}
+    	playRound(e.target.alt, cp);
+    }
+
+    function alertFunction(){
+    	const compPlay = document.querySelector('.computerPlay');
+    	compImage = compPlay.firstChild;
+    	if(compImage !==null){
+    	compPlay.removeChild(compImage);
+    }
+    const result = document.querySelector('.resultText');
+    if(result.firstChild !== null){
+    	result.removeChild(result.firstChild);
+    }
+    }
+
+ 	const plays =document.querySelectorAll('.play');
+ 	plays.forEach(play => play.addEventListener('mouseleave', removeHover));
+ 	plays.forEach(play => play.addEventListener('mousedown', makeMove));
+ 	window.addEventListener('mouseover', onHover);
+ </script>
+</body>

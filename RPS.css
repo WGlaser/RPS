@@ -1,0 +1,35 @@
+.plays{
+display:flex;
+	flex:1;
+}
+div.play {
+	
+	width:100px;
+	height: 100%;
+	border: .4rem solid;
+	border-color: black;
+	transition: all 1s ease;
+	background: white;
+
+}
+
+.pic{
+	max-width: 100px;
+    max-height: 100px;
+    
+}
+
+.hover {
+	transform: scale(1.1);
+	box-shadow: 0 0 5rem #ffc600;	
+}
+
+.computerPlay{
+	margin-top: 20px;
+	margin-left: 112.8px;
+	border: .4rem solid;
+	border-color: black;
+	height: 100px;
+	width: 100px;
+
+}
